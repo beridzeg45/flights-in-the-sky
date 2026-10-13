@@ -320,7 +320,7 @@ def load_rows(lat, lon, radius_km):
     return rows
 
 
-@st.fragment(run_every=15)
+@st.fragment(run_every=60)
 def show_flights(lat, lon, radius_km):
     # 1) loading message while data is fetched
     with st.spinner("⏳ Loading flights, please wait..."):
@@ -338,7 +338,7 @@ def show_flights(lat, lon, radius_km):
     st.session_state.seen_key = key
     st.session_state.seen = current
 
-    st.caption(f"{len(rows)} closest planes · last updated {time.strftime('%H:%M:%S')} (refreshes every 15 seconds)")
+    st.caption(f"{len(rows)} closest planes · last updated {time.strftime('%H:%M:%S')} (refreshes every minute)")
     if not rows:
         st.info("No planes with a known route in the sky within this radius right now.")
         return
